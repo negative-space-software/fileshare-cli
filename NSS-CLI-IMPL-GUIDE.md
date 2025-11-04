@@ -695,6 +695,7 @@ The about command displays application information with an optional ASCII art lo
 - Bold labels with colored values:
   - Version: green text
   - Author: yellow text
+  - License: magenta text (Apache License 2.0)
   - Server/Website: blue text
 - Gray text for descriptions
 - Simple spacing with blank lines (no separator lines)
@@ -740,6 +741,9 @@ async function aboutCommand() {
 
     // Author - bold label with yellow value
     console.log('  ' + chalk.bold('Author:   ') + chalk.yellow('Negative Space Software'));
+
+    // License - bold label with magenta value
+    console.log('  ' + chalk.bold('License:  ') + chalk.magenta('Apache License 2.0'));
     console.log('');
 
     // Server/Website - bold label with blue value
@@ -764,6 +768,7 @@ module.exports = aboutCommand;
 - Title: `chalk.cyan.bold()` - Application name
 - Version value: `chalk.green()` - Success/positive color
 - Author value: `chalk.yellow()` - Attention/highlight color
+- License value: `chalk.magenta()` - Legal/licensing color
 - Server/URL value: `chalk.blue()` - Link/navigation color
 - Labels: `chalk.bold()` - Standard bold for field names
 - Description: `chalk.gray()` - Secondary/muted text
@@ -771,7 +776,7 @@ module.exports = aboutCommand;
 **Spacing Standards:**
 - One blank line after ASCII logo
 - One blank line between title and first field
-- No blank lines between Version and Author
+- No blank lines between Version, Author, and License
 - One blank line before Server/URL (logical grouping)
 - One blank line before description section
 - One blank line at end of output
@@ -832,6 +837,7 @@ if (args.length === 0) {
 ```
 project-root/
 ├── package.json              # Dependencies and scripts
+├── LICENSE                   # Apache 2.0 license (REQUIRED)
 ├── .gitignore               # Exclude node_modules, .env, etc.
 ├── logo.png                 # Application logo for ASCII art
 ├── README.md                # Project documentation
@@ -864,6 +870,113 @@ project-root/
   - More secure (not in project directories)
   - Follows CLI conventions (like ~/.ssh, ~/.git-credentials)
 
+## Licensing Requirements
+
+All Negative Space Software CLI applications **MUST** be licensed under the Apache License 2.0. This ensures consistency across all NSS projects and provides clear terms for use, modification, and distribution.
+
+### 1. **Apache 2.0 License File**
+
+Every project must include a `LICENSE` file in the project root containing the full Apache 2.0 license text with the copyright notice:
+
+```
+Copyright 2025 Negative Space Software
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+### 2. **License Headers in Source Files**
+
+**ALL** source files (`.js` files) must include the Apache 2.0 license header at the top of the file. This header must be placed immediately after the shebang line (if present) and before any imports.
+
+**Standard License Header:**
+
+```javascript
+/*
+ * Copyright 2025 Negative Space Software
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+```
+
+**Example with Shebang:**
+
+```javascript
+#!/usr/bin/env node
+
+/*
+ * Copyright 2025 Negative Space Software
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+const { Command } = require('commander');
+// ... rest of file
+```
+
+### 3. **package.json License Field**
+
+The `package.json` must specify the Apache 2.0 license:
+
+```json
+{
+  "name": "app-name",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "Negative Space Software"
+}
+```
+
+### 4. **About Command License Display**
+
+The about command **MUST** display the license information. This should appear between the Author and Server/Website fields:
+
+```javascript
+console.log('  ' + chalk.bold('License:  ') + chalk.magenta('Apache License 2.0'));
+```
+
+See the "About Command with ASCII Art" section for the complete implementation.
+
+### License Header Checklist
+
+When creating or modifying files, ensure:
+- [ ] LICENSE file exists in project root
+- [ ] All `.js` files have license headers
+- [ ] Headers appear after shebang (if present)
+- [ ] Headers appear before imports
+- [ ] Copyright year is current
+- [ ] package.json specifies "Apache-2.0"
+- [ ] About command displays license
+
 ## Required Dependencies
 
 ### package.json
@@ -879,6 +992,9 @@ project-root/
   "scripts": {
     "start": "node src/index.js"
   },
+  "keywords": ["cli", "tool", "example"],
+  "author": "Negative Space Software",
+  "license": "Apache-2.0",
   "dependencies": {
     "commander": "^14.0.1",      // CLI framework and routing
     "inquirer": "^8.2.7",        // Interactive prompts
@@ -972,8 +1088,11 @@ When building a new NSS CLI application:
 - [ ] Create select functions (ui/select.js)
 - [ ] Create display functions (ui/display.js)
 - [ ] Implement authentication command
-- [ ] Implement about command with ASCII art
+- [ ] Implement about command with ASCII art and license display
 - [ ] Add logo.png to project root
+- [ ] Add LICENSE file with Apache 2.0 license text
+- [ ] Add license headers to all .js source files
+- [ ] Set license field in package.json to "Apache-2.0"
 - [ ] Create .gitignore (exclude node_modules, .env)
 - [ ] Test authentication flow
 - [ ] Test interactive selection with arrow keys
@@ -982,6 +1101,7 @@ When building a new NSS CLI application:
 - [ ] Verify all icons are text-based (no emojis)
 - [ ] Verify 24-hour time format
 - [ ] Verify consistent color usage
+- [ ] Verify about command displays license
 - [ ] Set up bin in package.json for global install
 - [ ] Test `npm install -g` installation
 - [ ] Document all commands in README
@@ -1000,6 +1120,13 @@ Create a CLI application following Negative Space Software standards:
 - Chalk for terminal colors
 - Configuration in ~/.app-name/.env
 
+**Licensing (REQUIRED):**
+- Apache License 2.0
+- LICENSE file in project root with full license text
+- License headers in ALL .js source files
+- License field in package.json: "Apache-2.0"
+- About command must display license in magenta
+
 **User Interface:**
 - Text-based icons: [*] (info/cyan), [+] (success/green), [!] (warning/yellow), [X] (error/red)
 - Color scheme: cyan headers, green success, yellow warnings, red errors, gray labels
@@ -1011,7 +1138,7 @@ Create a CLI application following Negative Space Software standards:
 **Commands:**
 - auth: Authentication setup
 - list: List items (default command)
-- about: Show version and ASCII art logo
+- about: Show version, author, license, and ASCII art logo
 - [custom commands as needed]
 
 **Error Handling:**
