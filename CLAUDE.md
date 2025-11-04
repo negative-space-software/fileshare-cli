@@ -8,12 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Key Reference Documents
 
-- **outline.txt**: Contains the core project requirements, server details, and ongoing instructions. Always check this file for the latest project specifications.
 - **NSS-CLI-IMPLEMENTATION-GUIDE.md**: Comprehensive design system and patterns for all Negative Space Software CLI applications. This defines the architecture, UI patterns, and coding standards to follow.
+- **CLI-ARCHITECTURE.md**: Technical architecture documentation for the fileshare CLI, including server infrastructure details and integration specifications.
+- **DEPLOYMENT-SUMMARY.md**: Server deployment notes and configuration details for the NGINX and Cloudflare Tunnel setup.
 
 ## Development Commands
-
-This project is in the planning stage and does not yet have a codebase. When development begins, typical commands will include:
 
 ```bash
 # Install dependencies

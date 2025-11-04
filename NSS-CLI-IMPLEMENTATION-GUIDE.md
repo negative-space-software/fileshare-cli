@@ -686,51 +686,95 @@ module.exports = authCommand;
 ```
 
 ### 7. **About Command with ASCII Art** (src/commands/about.js)
+
+The about command displays application information with an optional ASCII art logo. It uses a clean, modern format without separator lines.
+
+**Formatting Requirements:**
+- ASCII logo: 40 width x 20 height, color enabled
+- Cyan bold title for application name
+- Bold labels with colored values:
+  - Version: green text
+  - Author: yellow text
+  - Server/Website: blue text
+- Gray text for descriptions
+- Simple spacing with blank lines (no separator lines)
+- Graceful fallback if logo cannot be loaded (skip logo, show text only)
+
+**Implementation:**
+
 ```javascript
 const chalk = require('chalk');
 const asciify = require('asciify-image');
 const path = require('path');
+const { displayError } = require('../utils/errors');
 
+/**
+ * About command - displays application information
+ */
 async function aboutCommand() {
   try {
     // Convert logo PNG to ASCII
     const logoPath = path.join(__dirname, '../../logo.png');
 
-    const options = {
-      fit: 'box',
-      width: 40,
-      height: 20,
-      color: true
-    };
+    try {
+      const options = {
+        fit: 'box',
+        width: 40,      // Standard width for NSS CLI logos
+        height: 20,     // Standard height for NSS CLI logos
+        color: true     // Enable color ASCII art
+      };
 
-    const ascii = await asciify(logoPath, options);
+      const ascii = await asciify(logoPath, options);
+      console.log('\n' + ascii);
+    } catch (logoError) {
+      // Fallback if logo can't be loaded - show text header instead
+      console.log('');
+    }
 
-    console.log('\n' + ascii);
-    console.log(chalk.cyan('='.repeat(80)));
-    console.log(chalk.bold('  Application Name'));
-    console.log(chalk.cyan('='.repeat(80)));
+    // Application title - cyan bold
+    console.log('\n  ' + chalk.cyan.bold('APPLICATION NAME'));
     console.log('');
-    console.log(chalk.gray('Version:'), '1.0.0');
-    console.log(chalk.gray('Author:'), 'Negative Space Software');
-    console.log(chalk.gray('Website:'), 'https://negativespacesoftware.com');
+
+    // Version - bold label with green value
+    console.log('  ' + chalk.bold('Version:  ') + chalk.green('v1.0.0'));
+
+    // Author - bold label with yellow value
+    console.log('  ' + chalk.bold('Author:   ') + chalk.yellow('Negative Space Software'));
     console.log('');
-    console.log(chalk.gray('Description:'));
-    console.log('  Brief description of what this CLI tool does');
+
+    // Server/Website - bold label with blue value
+    console.log('  ' + chalk.bold('Server:   ') + chalk.blue('https://example.com'));
     console.log('');
-    console.log(chalk.cyan('='.repeat(80)));
+
+    // Description - gray text
+    console.log('  ' + chalk.gray('Brief description of what this CLI tool does'));
+    console.log('  ' + chalk.gray('Additional description line if needed'));
     console.log('');
 
   } catch (error) {
-    // Fallback if logo can't be loaded
-    console.log(chalk.cyan('\n=== Application Name ===\n'));
-    console.log(chalk.gray('Version:'), '1.0.0');
-    console.log(chalk.gray('Author:'), 'Negative Space Software');
-    console.log('');
+    displayError(error);
+    process.exit(1);
   }
 }
 
 module.exports = aboutCommand;
 ```
+
+**Color Palette:**
+- Title: `chalk.cyan.bold()` - Application name
+- Version value: `chalk.green()` - Success/positive color
+- Author value: `chalk.yellow()` - Attention/highlight color
+- Server/URL value: `chalk.blue()` - Link/navigation color
+- Labels: `chalk.bold()` - Standard bold for field names
+- Description: `chalk.gray()` - Secondary/muted text
+
+**Spacing Standards:**
+- One blank line after ASCII logo
+- One blank line between title and first field
+- No blank lines between Version and Author
+- One blank line before Server/URL (logical grouping)
+- One blank line before description section
+- One blank line at end of output
 
 ### 8. **Main Entry Point** (src/index.js)
 ```javascript

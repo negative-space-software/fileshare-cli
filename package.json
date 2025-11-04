@@ -1,0 +1,23 @@
+{
+  "name": "fileshare-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for securely transferring large files and folders between computers",
+  "main": "src/index.js",
+  "bin": {
+    "fileshare": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": ["cli", "file-sharing", "sftp", "transfer"],
+  "author": "Negative Space Software",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^14.0.1",
+    "inquirer": "^8.2.7",
+    "chalk": "^4.1.2",
+    "dotenv": "^17.2.3",
+    "ssh2-sftp-client": "^10.0.3",
+    "asciify-image": "^0.1.10"
+  }
+}
