@@ -1,0 +1,38 @@
+# Cloudflare Tunnel Configuration for fileshare-cli
+# This configuration routes traffic from fileshare.ct-42210.com to the local NGINX server
+
+# Tunnel credentials file (generated during cloudflared tunnel create)
+# This file will be created when you run: cloudflared tunnel create fileshare
+# credentials-file: /root/.cloudflared/<tunnel-id>.json
+
+# Tunnel ID (will be set after tunnel creation)
+# tunnel: <tunnel-id>
+
+# Ingress rules - routes traffic to local services
+ingress:
+  # Route fileshare.ct-42210.com to local NGINX on port 9090
+  - hostname: fileshare.ct-42210.com
+    service: http://localhost:9090
+    originRequest:
+      # Pass through original headers
+      noTLSVerify: false
+      # Connection settings
+      connectTimeout: 30s
+      # Disable HTTP/2 if needed
+      # http2Origin: false
+
+  # Catch-all rule (required) - returns 404 for unmatched hostnames
+  - service: http_status:404
+
+# Logging configuration
+# Adjust log level as needed: debug, info, warn, error, fatal
+# loglevel: info
+
+# Metrics server (optional) - useful for monitoring
+# metrics: localhost:9091
+
+# Protocol settings
+# protocol: quic  # Options: quic, http2, h2mux (quic is recommended)
+
+# Number of concurrent connections
+# retries: 5
