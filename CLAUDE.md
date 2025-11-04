@@ -119,3 +119,11 @@ When the codebase is implemented, test:
 - File upload/download functionality
 - Error handling with complete stack traces
 - All CLI commands work as expected
+
+## Git Commit Guidelines
+
+**IMPORTANT**: When creating git commits:
+- **NEVER include Claude Code attribution** (no "Generated with Claude Code" or "Co-Authored-By: Claude" lines)
+- Write clear, professional commit messages describing the changes
+- Use conventional commit format when appropriate
+- Commits should appear as if written by the developer, not AI-assisted
