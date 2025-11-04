@@ -11,7 +11,7 @@
   },
   "keywords": ["cli", "file-sharing", "sftp", "transfer"],
   "author": "Negative Space Software",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "commander": "^14.0.1",
     "inquirer": "^8.2.7",
