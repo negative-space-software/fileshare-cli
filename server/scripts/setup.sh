@@ -141,4 +141,4 @@ echo -e "  Cloudflare: ${YELLOW}$CONFIG_DEST${NC}"
 echo -e "  Upload directory: ${YELLOW}$FILESHARE_DIR${NC}"
 echo -e "${CYAN}========================================${NC}\n"
 
-echo -e "${CYAN}${INFO} To test NGINX locally: ${YELLOW}curl http://localhost:9090${NC}\n"
+echo -e "${CYAN}${INFO} To test NGINX locally: ${YELLOW}curl http://localhost:9091${NC}\n"

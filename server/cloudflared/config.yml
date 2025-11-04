@@ -10,9 +10,9 @@
 
 # Ingress rules - routes traffic to local services
 ingress:
-  # Route fileshare.ct-42210.com to local NGINX on port 9090
+  # Route fileshare.ct-42210.com to local NGINX on port 9091
   - hostname: fileshare.ct-42210.com
-    service: http://localhost:9090
+    service: http://localhost:9091
     originRequest:
       # Pass through original headers
       noTLSVerify: false

@@ -74,8 +74,10 @@ Configuration must be stored in `~/.fileshare/.env` (not in the project director
 
 - SSH connection: Uses key "njt-hpe-proliant" to connect as root user
 - Server OS: Ubuntu Server
-- Target directory: ~ (root home directory)
-- Web access: https://fileshare.ct-42210.com (proxied via Cloudflare Tunnel on port 8081)
+- Target directory: /root/fileshare (served by NGINX on port 9091)
+- Web access: https://fileshare.ct-42210.com (proxied via existing Cloudflare Tunnel)
+- Upload directory: Files uploaded to /root/fileshare/ are accessible via the web interface
+- Existing services: Cloudflare tunnel already configured with ingress rules for multiple services
 
 ## Coding Practices
 

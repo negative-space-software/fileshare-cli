@@ -23,9 +23,10 @@ server information
 - njt-hpe-proliant ssh tunnels to the root user at ~
 
 Cloudflare configuration:
-  - Configure Cloudflare to route pikapp-photos.ct-42210.com traffic to port 9090
-  - Can use Cloudflare Tunnel or port forwarding/proxy rules
-  - SSL/HTTPS should be handled by Cloudflare (origin server uses HTTP on port 9090)
+  - Using existing Cloudflare Tunnel on the server
+  - Routes fileshare.ct-42210.com traffic to port 9091 (NGINX)
+  - SSL/HTTPS handled by Cloudflare (origin server uses HTTP on port 9091)
+  - Config location: /etc/cloudflared/config.yml
 
 CODING PRACTICES FOR CLAUDE:
 On the creation of CLAUDE.MD, Copy these coding practices below into that file for easy reference, but do not copy the rest of thhis outline.txt file. Instead, reference this outline.txt file from claude.md, so that any future changes made without claude to this outline.txt file are reflected

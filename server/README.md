@@ -8,7 +8,7 @@ This directory contains the server-side infrastructure for the fileshare-cli app
 ┌─────────────┐         ┌──────────────────┐         ┌─────────────────┐
 │   CLI App   │ ──SSH──>│  Ubuntu Server   │<──HTTP──│   Cloudflare    │
 │  (Client)   │         │                  │         │     Tunnel      │
-└─────────────┘         │  NGINX (9090)    │         └─────────────────┘
+└─────────────┘         │  NGINX (9091)    │         └─────────────────┘
                         │  /root/fileshare │                  │
                         └──────────────────┘                  │
                                                               │
@@ -20,7 +20,7 @@ This directory contains the server-side infrastructure for the fileshare-cli app
 ## Components
 
 ### 1. NGINX Static File Server
-- **Port**: 9090 (local only)
+- **Port**: 9091 (local only)
 - **Document Root**: `/root/fileshare`
 - **Features**:
   - Directory listing with autoindex
@@ -162,7 +162,7 @@ server/
 **Location**: `/etc/nginx/sites-available/fileshare`
 
 Key settings:
-- `listen 9090` - Port for local access
+- `listen 9091` - Port for local access
 - `root /root/fileshare` - Upload directory
 - `client_max_body_size 10G` - Max file size
 - `autoindex on` - Enable directory listing
@@ -179,7 +179,7 @@ systemctl reload nginx  # Apply changes
 
 Key settings:
 - `hostname: fileshare.ct-42210.com` - Public domain
-- `service: http://localhost:9090` - Local NGINX server
+- `service: http://localhost:9091` - Local NGINX server
 
 To modify:
 ```bash
@@ -236,13 +236,13 @@ find /root/fileshare -type d -empty -delete
 
 ### NGINX Issues
 
-**Problem**: Cannot access http://localhost:9090
+**Problem**: Cannot access http://localhost:9091
 ```bash
 # Check if NGINX is running
 systemctl status nginx
 
-# Check if port 9090 is listening
-netstat -tulpn | grep 9090
+# Check if port 9091 is listening
+netstat -tulpn | grep 9091
 
 # Check NGINX configuration
 nginx -t
