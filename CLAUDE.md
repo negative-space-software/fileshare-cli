@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Key Reference Documents
 
-- **NSS-CLI-IMPLEMENTATION-GUIDE.md**: Comprehensive design system and patterns for all Negative Space Software CLI applications. This defines the architecture, UI patterns, and coding standards to follow.
+- **NSS-CLI-IMPL-GUIDE.md**: Comprehensive design system and patterns for all Negative Space Software CLI applications. This defines the architecture, UI patterns, coding standards, and licensing requirements to follow.
 - **CLI-ARCHITECTURE.md**: Technical architecture documentation for the fileshare CLI, including server infrastructure details and integration specifications.
 - **DEPLOYMENT-SUMMARY.md**: Server deployment notes and configuration details for the NGINX and Cloudflare Tunnel setup.
 
@@ -40,7 +40,7 @@ fileshare [command]
 
 ### NSS CLI Design System
 
-This project **MUST** follow the Negative Space Software CLI Implementation Guide (see NSS-CLI-IMPLEMENTATION-GUIDE.md). Key requirements:
+This project **MUST** follow the Negative Space Software CLI Implementation Guide (see NSS-CLI-IMPL-GUIDE.md). Key requirements:
 
 **Three-Layer Architecture:**
 - `src/commands/` - Orchestration layer for each CLI command
@@ -102,12 +102,21 @@ Update outline.txt, CLAUDE.md, and any documentation when making changes to inst
 
 ## Error Handling Requirements
 
-From NSS-CLI-IMPLEMENTATION-GUIDE.md:
+From NSS-CLI-IMPL-GUIDE.md:
 - **NEVER truncate errors**
 - Always show complete error messages with full stack traces
 - Use try/catch in all commands
 - Call `displayError(error)` from `src/utils/errors.js`
 - Exit with `process.exit(1)` after errors
+
+## Licensing Requirements
+
+From NSS-CLI-IMPL-GUIDE.md:
+- **Apache License 2.0** is required for all NSS CLI applications
+- LICENSE file must exist in project root with full Apache 2.0 license text
+- All `.js` source files must include Apache 2.0 license header
+- package.json must specify `"license": "Apache-2.0"`
+- About command must display "License: Apache License 2.0" in magenta
 
 ## Testing Before Commits
 
